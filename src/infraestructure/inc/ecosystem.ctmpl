@@ -1,0 +1,11 @@
+{
+  "name" : "nodejs-base-postgres-api",
+  "script" : "src/infraestructure/server/index.js",
+  "watch" : true,
+  "interpreter": "node_modules/.bin/babel-node",
+  "env_docker": {
+    "ENVIRONMENT": "{{ env "ENVIRONMENT" }}",
+    "PORT": {{ env "PORT" }},
+    "RECTOR_ADAPTER_URL": "{{ env "RECTOR_ADAPTER_URL" }}"
+  }
+}

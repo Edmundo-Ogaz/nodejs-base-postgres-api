@@ -1,0 +1,67 @@
+{
+  "name": "nodejs-base-postgres-api",
+  "version": "1.0.0",
+  "description": "Nodejs base postgres api project",
+  "main": "index.js",
+  "repository": "git@[GIT DOMAIN]:s[PROJECT]/nodejs-base-postgres-api.git",
+  "author": "ACME",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "pm2-runtime src/infraestructure/env/ecosystem.json --env local",
+    "start:docker": "pm2-runtime src/infraestructure/env/ecosystem.json --env docker",
+    "test": "jest",
+    "test:ci": "cross-env CI=true jest --silent",
+    "coverage": "jest --coverage",
+    "lint": "eslint --fix ./src",
+    "docker:build": "docker build -f src/infraestructure/docker/dev/Dockerfile -t [REGISTRY]/nodejs-base-postgres-api:latest .",
+    "docker:start": "docker run --rm -it -p 3080:3080 [REGISTRY]/nodejs-base-postgres-api:latest",
+    "docker:dev": "docker run --rm -it -p 3080:3080 -v `pwd`/src:/app/src [REGISTRY]/nodejs-base-postgres-api:latest",
+    "docker:sh": "docker run --rm -it -p 3080:3080 [REGISTRY]/nodejs-base-postgres-api:latest sh"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "testEnvironment": "node"
+  },
+  "coverageThreshold": {
+    "global": {
+      "branches": 60,
+      "functions": 80,
+      "lines": 80,
+      "statements": 80
+    }
+  },
+  "dependencies": {
+    "@koa/cors": "2",
+    "axios": "^0.18.0",
+    "http-status-codes": "^1.3.0",
+    "joi": "^14.3.1",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "2",
+    "koa-helmet": "^4.0.0",
+    "koa-jwt": "^3.5.1",
+    "koa-router": "^7.4.0",
+    "pm2": "^3.3.1",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.3",
+    "@babel/node": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "babel-jest": "^24.1.0",
+    "cross-env": "^5.2.0",
+    "eslint": "^5.14.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^4.0.0",
+    "eslint-plugin-import": "^2.16.0",
+    "eslint-plugin-jest": "^22.3.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "husky": "^1.3.1",
+    "jest": "^24.1.0",
+    "prettier": "^1.16.4",
+    "supertest": "^3.4.2"
+  }
+}

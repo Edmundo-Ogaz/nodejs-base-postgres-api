@@ -1,0 +1,16 @@
+{
+  "name": "nodejs-base-postgres-api",
+  "script": "src/infraestructure/server/index.js",
+  "watch": true,
+  "interpreter": "node_modules/.bin/babel-node",
+  "env_docker": {
+    "ENVIRONMENT": "development",
+    "PORT": 3080,
+    "RECTOR_ADAPTER_URL": "http://host.docker.internal:8080"
+  },
+  "env_local": {
+    "ENVIRONMENT": "development",
+    "PORT": 3080,
+    "RECTOR_ADAPTER_URL": "http://localhost:8080"
+  }
+}
